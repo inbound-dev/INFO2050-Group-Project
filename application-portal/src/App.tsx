@@ -4,6 +4,7 @@ import Home from './pages/Home'
 import About from './pages/About'
 import Contact from './pages/Contact'
 import Apply from './pages/Apply'
+import LoginPage from './pages/login'
 import './App.css'
 
 function App() {
@@ -16,7 +17,7 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/apply" element={<Apply />} />
-          <Route path="/login" element={<Apply />} />
+          <Route path="/login" element={<LoginPage />} />
         </Routes>
       </main>
     </Router>
