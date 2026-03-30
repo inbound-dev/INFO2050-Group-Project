@@ -26,7 +26,7 @@ const HomePage: React.FC = () => {
       </main>
 
       <footer style={styles.footer}>
-        <p>&copy; 2026 Your Company. All rights reserved.</p>
+        <p>&copy; 2026 Conestoga College. All rights reserved.</p>
       </footer>
     </div>
   );
@@ -42,7 +42,7 @@ const styles: { [key: string]: React.CSSProperties } = {
     flexDirection: "column",
   },
   header: {
-    backgroundColor: "#2c3e50",
+    backgroundColor: "#666666",
     color: "white",
     textAlign: "center",
     padding: "30px 0",
