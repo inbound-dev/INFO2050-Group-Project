@@ -4,7 +4,9 @@ import Home from './pages/Home'
 import About from './pages/About'
 import Contact from './pages/Contact'
 import Apply from './pages/Apply'
-import LoginPage from './pages/login'
+import LoginPage from './pages/Login'
+import AdminPage from './pages/Admin'
+import Complete from './pages/Complete'
 import './App.css'
 
 function App() {
@@ -18,6 +20,8 @@ function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/apply" element={<Apply />} />
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/admin" element={<AdminPage />} />
+          <Route path="/complete" element={<Complete />} />
         </Routes>
       </main>
     </Router>

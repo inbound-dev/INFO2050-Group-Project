@@ -1,17 +1,48 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const LoginPage: React.FC = () => {
-  const [identifier, setIdentifier] = useState("");
-  const [password, setPassword] = useState("");
+  const [identifier, setIdentifier] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    const user = localStorage.getItem("user");
+
+    if (token && user) {
+      window.location.href = "/admin";
+    }
+  }, []);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("Login attempt:", { identifier, password });
-    //login logic here
-};
 
+    try {
+      const res = await fetch("http://localhost:5000/api/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: identifier,
+          password: password,
+        }),
+      });
 
-  
+      const data = await res.json();
+
+      if (data.success) {
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("user", JSON.stringify(data.user));
+        alert("Login successful!");
+        window.location.href = "/admin";
+      } else {
+        alert(data.message || "Login failed");
+      }
+    } catch (error) {
+      console.error("Login error:", error);
+      alert("Backend not running or request failed. Check localhost:5000");
+    }
+  };
 
   return (
     <div style={styles.container}>
@@ -21,9 +52,11 @@ const LoginPage: React.FC = () => {
         <form onSubmit={handleSubmit} style={styles.form}>
           <input
             type="text"
-            placeholder="Email or Phone"
+            placeholder="Email"
             value={identifier}
-            onChange={(e) => setIdentifier(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              setIdentifier(e.target.value)
+            }
             style={styles.input}
             required
           />
@@ -32,7 +65,9 @@ const LoginPage: React.FC = () => {
             type="password"
             placeholder="Password"
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              setPassword(e.target.value)
+            }
             style={styles.input}
             required
           />
@@ -42,24 +77,19 @@ const LoginPage: React.FC = () => {
           </button>
         </form>
       </div>
-
-      <footer style={styles.footer}>
-        <p>© 2026 Conestoga College</p>
-      </footer>
     </div>
   );
 };
+
 const styles: { [key: string]: React.CSSProperties } = {
   container: {
     minHeight: "100vh",
     display: "flex",
-    flexDirection: "column",
-    justifyContent: "space-between",
+    justifyContent: "center",
+    alignItems: "center",
     backgroundColor: "#f4f4f4",
-    fontFamily: "Arial, sans-serif",
   },
   card: {
-    margin: "auto",
     backgroundColor: "#ffffff",
     padding: "40px",
     borderRadius: "8px",
@@ -91,12 +121,6 @@ const styles: { [key: string]: React.CSSProperties } = {
     borderRadius: "5px",
     cursor: "pointer",
     fontSize: "16px",
-  },
-  footer: {
-    textAlign: "center",
-    padding: "15px 0",
-    backgroundColor: "#2c3e50",
-    color: "#fff",
   },
 };
 
