@@ -7,7 +7,8 @@ const AdminPage: React.FC = () => {
   return (
     <div style={styles.container}>
       <div style={styles.card}>
-        <h1 style={styles.title}>Admin Dashboard</h1>
+        <h1 style={styles.title}>Admin</h1>
+        <h1 style={styles.title}>Dashboard</h1>
         <p style={styles.text}>Welcome to the admin page.</p>
 
         {parsedUser && (
