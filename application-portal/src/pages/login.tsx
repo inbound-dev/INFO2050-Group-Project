@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 
 const LoginPage: React.FC = () => {
-  const [identifier, setIdentifier] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const [error, setError] = useState<string>("");
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -23,7 +24,7 @@ const LoginPage: React.FC = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          email: identifier,
+          email: email,
           password: password,
         }),
       });
@@ -31,97 +32,54 @@ const LoginPage: React.FC = () => {
       const data = await res.json();
 
       if (data.success) {
+        setError("");
         localStorage.setItem("token", data.token);
         localStorage.setItem("user", JSON.stringify(data.user));
-        alert("Login successful!");
         window.location.href = "/admin";
       } else {
-        alert(data.message || "Login failed");
+        setError(data.message || "Login failed");
       }
     } catch (error) {
       console.error("Login error:", error);
-      alert("Backend not running or request failed. Check localhost:5000");
+      setError("Backend not running or request failed.");
     }
   };
 
   return (
-    <div style={styles.container}>
-      <div style={styles.card}>
-        <h1 style={styles.title}>Login</h1>
+    <div className="page">
+      <h1>Login</h1>
 
-        <form onSubmit={handleSubmit} style={styles.form}>
+      {error && <p className="error">{error}</p>}
+
+      <form onSubmit={handleSubmit} noValidate>
+        <div>
+          <label htmlFor="email">Email</label>
           <input
-            type="text"
-            placeholder="Email"
-            value={identifier}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              setIdentifier(e.target.value)
-            }
-            style={styles.input}
+            type="email"
+            id="email"
+            name="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             required
           />
+        </div>
 
+        <div>
+          <label htmlFor="password">Password</label>
           <input
             type="password"
-            placeholder="Password"
+            id="password"
+            name="password"
             value={password}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              setPassword(e.target.value)
-            }
-            style={styles.input}
+            onChange={(e) => setPassword(e.target.value)}
             required
           />
+        </div>
 
-          <button type="submit" style={styles.button}>
-            Sign In
-          </button>
-        </form>
-      </div>
+        <button type="submit">Sign In</button>
+      </form>
     </div>
   );
-};
-
-const styles: { [key: string]: React.CSSProperties } = {
-  container: {
-    minHeight: "100vh",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#f4f4f4",
-  },
-  card: {
-    backgroundColor: "#ffffff",
-    padding: "40px",
-    borderRadius: "8px",
-    boxShadow: "0 2px 10px rgba(0,0,0,0.1)",
-    width: "100%",
-    maxWidth: "400px",
-    textAlign: "center",
-  },
-  title: {
-    marginBottom: "20px",
-    color: "#2c3e50",
-  },
-  form: {
-    display: "flex",
-    flexDirection: "column",
-  },
-  input: {
-    marginBottom: "15px",
-    padding: "12px",
-    borderRadius: "5px",
-    border: "1px solid #ccc",
-    fontSize: "14px",
-  },
-  button: {
-    padding: "12px",
-    backgroundColor: "#3498db",
-    color: "#fff",
-    border: "none",
-    borderRadius: "5px",
-    cursor: "pointer",
-    fontSize: "16px",
-  },
 };
 
 export default LoginPage;

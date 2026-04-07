@@ -4,6 +4,9 @@ const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const { authenticateToken, requireAdmin } = require('./middleware/auth');
+const { validateApply, validateLogin, validateContact } = require('./middleware/validation');
+const { logger, logEvent } = require('./middleware/logger');
 require('dotenv').config();
 
 const pool = require('./db');
@@ -13,6 +16,7 @@ const app = express();
 app.use(helmet());
 app.use(cors());
 app.use(express.json());
+app.use(logger);
 
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000,
@@ -33,6 +37,12 @@ app.get('/test-db', async (req, res) => {
       time: result.rows[0]
     });
   } catch (error) {
+    logEvent({
+      event: "DB_CONNECTION_FAILED",
+      error: error.message,
+      ip: req.ip
+    });
+
     res.status(500).json({
       success: false,
       error: error.message
@@ -40,16 +50,9 @@ app.get('/test-db', async (req, res) => {
   }
 });
 
-app.post('/api/apply', async (req, res) => {
+app.post('/api/apply', validateApply, async (req, res) => {
   try {
     const { full_name, email, phone, message } = req.body;
-
-    if (!full_name || !email) {
-      return res.status(400).json({
-        success: false,
-        message: 'Full name and email are required.'
-      });
-    }
 
     const defaultPasswordHash =
       '$2b$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy';
@@ -82,37 +85,40 @@ app.post('/api/apply', async (req, res) => {
       INSERT INTO applications (user_id, status, bio)
       VALUES ($1, $2, $3)
       `,
-      [
-        userId,
-        'submitted',
-        message || 'No bio provided'
-      ]
+      [userId, 'submitted', message || 'No bio provided']
     );
+
+    logEvent({
+      event: "APPLICATION_SUBMITTED",
+      email,
+      user_id: userId,
+      ip: req.ip
+    });
 
     res.json({
       success: true,
       message: 'Application submitted successfully.'
     });
+
   } catch (error) {
     console.error('Apply error:', error);
+
+    logEvent({
+      event: "APPLICATION_FAILED",
+      error: error.message,
+      ip: req.ip
+    });
+
     res.status(500).json({
       success: false,
-      message: 'Failed to submit application.',
-      error: error.message
+      message: 'Failed to submit application.'
     });
   }
 });
 
-app.post('/api/login', async (req, res) => {
+app.post('/api/login', validateLogin, async (req, res) => {
   try {
     const { email, password } = req.body;
-
-    if (!email || !password) {
-      return res.status(400).json({
-        success: false,
-        message: 'Email and password are required.'
-      });
-    }
 
     const result = await pool.query(
       `SELECT u.user_id, u.full_name, u.email, u.password_hash, r.role_name
@@ -123,6 +129,13 @@ app.post('/api/login', async (req, res) => {
     );
 
     if (result.rows.length === 0) {
+      logEvent({
+        event: "LOGIN_FAILED",
+        email,
+        reason: "User not found",
+        ip: req.ip
+      });
+
       return res.status(401).json({
         success: false,
         message: 'Invalid email or password.'
@@ -134,6 +147,13 @@ app.post('/api/login', async (req, res) => {
     const passwordMatch = await bcrypt.compare(password, user.password_hash || '');
 
     if (!passwordMatch) {
+      logEvent({
+        event: "LOGIN_FAILED",
+        email,
+        reason: "Wrong password",
+        ip: req.ip
+      });
+
       return res.status(401).json({
         success: false,
         message: 'Invalid email or password.'
@@ -141,6 +161,12 @@ app.post('/api/login', async (req, res) => {
     }
 
     if (user.role_name !== 'admin') {
+      logEvent({
+        event: "UNAUTHORIZED_ADMIN_ACCESS",
+        email,
+        ip: req.ip
+      });
+
       return res.status(403).json({
         success: false,
         message: 'Access denied. Admins only.'
@@ -157,6 +183,13 @@ app.post('/api/login', async (req, res) => {
       { expiresIn: '1h' }
     );
 
+    logEvent({
+      event: "LOGIN_SUCCESS",
+      email: user.email,
+      user_id: user.user_id,
+      ip: req.ip
+    });
+
     res.json({
       success: true,
       message: 'Login successful.',
@@ -168,14 +201,72 @@ app.post('/api/login', async (req, res) => {
         role: user.role_name
       }
     });
+
   } catch (error) {
     console.error('Login error:', error);
+
+    logEvent({
+      event: "LOGIN_ERROR",
+      error: error.message,
+      ip: req.ip
+    });
+
     res.status(500).json({
       success: false,
-      message: 'Login failed.',
-      error: error.message
+      message: 'Login failed.'
     });
   }
+});
+
+app.post('/api/contact', validateContact, async (req, res) => {
+  try {
+    const { name, email, message } = req.body;
+
+    logEvent({
+      event: "CONTACT_SUBMITTED",
+      name,
+      email,
+      ip: req.ip
+    });
+
+    res.json({
+      success: true,
+      message: 'Message sent successfully'
+    });
+
+  } catch (error) {
+    console.error('Contact error:', error);
+
+    logEvent({
+      event: "CONTACT_FAILED",
+      error: error.message,
+      ip: req.ip
+    });
+
+    res.status(500).json({
+      message: 'Internal server error'
+    });
+  }
+});
+
+app.get('/api/admin', authenticateToken, requireAdmin, (req, res) => {
+  logEvent({
+    event: "ADMIN_ACCESS",
+    user: req.user?.email,
+    ip: req.ip
+  });
+
+  res.json({ message: 'Admin access granted' });
+});
+
+app.get('/test-token', (req, res) => {
+  const token = jwt.sign(
+    { user_id: 1, email: 'test@test.com', role: 'admin' },
+    process.env.JWT_SECRET,
+    { expiresIn: '1h' }
+  );
+
+  res.json({ token });
 });
 
 const PORT = 5000;

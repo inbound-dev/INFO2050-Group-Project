@@ -5,6 +5,7 @@ export default function Apply() {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [bio, setBio] = useState("");
+  const [error, setError] = useState("");
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -26,15 +27,16 @@ export default function Apply() {
 
       const data = await res.json();
 
-      if (data.success) {
+      if (res.ok && data.success) {
+        setError("");
         alert("Application submitted successfully!");
         window.location.href = "/complete";
       } else {
-        alert(data.error || data.message || "Application failed");
+        setError(data.message || "Application failed");
       }
     } catch (error) {
       console.error("Apply error:", error);
-      alert("Backend not running or request failed.");
+      setError("Backend not running or request failed.");
     }
   };
 
@@ -43,9 +45,11 @@ export default function Apply() {
       <h1>Apply Now</h1>
       <p>Submit your application to our program.</p>
 
-      <form onSubmit={handleSubmit}>
+      {error && <p className="error">{error}</p>}
+
+      <form onSubmit={handleSubmit} noValidate>
         <div>
-          <label htmlFor="fullName">Full Name: </label>
+          <label htmlFor="fullName">Full Name</label>
           <input
             type="text"
             id="fullName"
@@ -57,7 +61,7 @@ export default function Apply() {
         </div>
 
         <div>
-          <label htmlFor="email">Email: </label>
+          <label htmlFor="email">Email</label>
           <input
             type="email"
             id="email"
@@ -69,7 +73,7 @@ export default function Apply() {
         </div>
 
         <div>
-          <label htmlFor="phone">Phone: </label>
+          <label htmlFor="phone">Phone</label>
           <input
             type="tel"
             id="phone"
@@ -80,7 +84,7 @@ export default function Apply() {
         </div>
 
         <div>
-          <label htmlFor="bio">Bio: </label>
+          <label htmlFor="bio">Bio</label>
           <textarea
             id="bio"
             name="bio"
