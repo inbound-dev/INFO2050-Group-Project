@@ -1,0 +1,17 @@
+[
+  {
+    "timestamp": "2026-04-08T12:06:32.818Z",
+    "event": "APPLICATION_FAILED",
+    "error": "password authentication failed for user \"postgres\"",
+    "ip": "::ffff:127.0.0.1"
+  },
+  {
+    "timestamp": "2026-04-08T12:06:32.821Z",
+    "method": "POST",
+    "route": "/api/apply",
+    "status": 500,
+    "ip": "::ffff:127.0.0.1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0",
+    "duration": "56ms"
+  }
+]
