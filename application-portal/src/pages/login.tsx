@@ -77,6 +77,10 @@ const LoginPage: React.FC = () => {
         </div>
 
         <button type="submit">Sign In</button>
+
+        <p>
+          Don't have an account? <a href="/apply">Sign up</a>
+        </p>
       </form>
     </div>
   );
