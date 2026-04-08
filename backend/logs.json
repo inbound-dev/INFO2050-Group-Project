@@ -13,5 +13,276 @@
     "ip": "::ffff:127.0.0.1",
     "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0",
     "duration": "56ms"
+  },
+  {
+    "timestamp": "2026-04-08T12:08:21.660Z",
+    "event": "APPLICATION_FAILED",
+    "error": "password authentication failed for user \"postgres\"",
+    "ip": "::ffff:127.0.0.1"
+  },
+  {
+    "timestamp": "2026-04-08T12:08:21.664Z",
+    "method": "POST",
+    "route": "/api/apply",
+    "status": 500,
+    "ip": "::ffff:127.0.0.1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0",
+    "duration": "58ms"
+  },
+  {
+    "timestamp": "2026-04-08T12:09:40.966Z",
+    "event": "APPLICATION_FAILED",
+    "error": "password authentication failed for user \"postgres\"",
+    "ip": "::ffff:127.0.0.1"
+  },
+  {
+    "timestamp": "2026-04-08T12:09:40.967Z",
+    "method": "POST",
+    "route": "/api/apply",
+    "status": 500,
+    "ip": "::ffff:127.0.0.1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0",
+    "duration": "150ms"
+  },
+  {
+    "timestamp": "2026-04-08T12:09:42.908Z",
+    "event": "APPLICATION_FAILED",
+    "error": "password authentication failed for user \"postgres\"",
+    "ip": "::ffff:127.0.0.1"
+  },
+  {
+    "timestamp": "2026-04-08T12:09:42.909Z",
+    "method": "POST",
+    "route": "/api/apply",
+    "status": 500,
+    "ip": "::ffff:127.0.0.1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0",
+    "duration": "33ms"
+  },
+  {
+    "timestamp": "2026-04-08T12:10:08.937Z",
+    "event": "APPLICATION_FAILED",
+    "error": "insert or update on table \"users\" violates foreign key constraint \"users_role_id_fkey\"",
+    "ip": "::ffff:127.0.0.1"
+  },
+  {
+    "timestamp": "2026-04-08T12:10:08.941Z",
+    "method": "POST",
+    "route": "/api/apply",
+    "status": 500,
+    "ip": "::ffff:127.0.0.1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0",
+    "duration": "66ms"
+  },
+  {
+    "timestamp": "2026-04-08T12:10:58.961Z",
+    "event": "APPLICATION_FAILED",
+    "error": "insert or update on table \"users\" violates foreign key constraint \"users_role_id_fkey\"",
+    "ip": "::ffff:127.0.0.1"
+  },
+  {
+    "timestamp": "2026-04-08T12:10:58.962Z",
+    "method": "POST",
+    "route": "/api/apply",
+    "status": 500,
+    "ip": "::ffff:127.0.0.1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0",
+    "duration": "41ms"
+  },
+  {
+    "timestamp": "2026-04-08T12:20:55.857Z",
+    "event": "APPLICATION_FAILED",
+    "error": "insert or update on table \"users\" violates foreign key constraint \"users_role_id_fkey\"",
+    "ip": "::ffff:127.0.0.1"
+  },
+  {
+    "timestamp": "2026-04-08T12:20:55.858Z",
+    "method": "POST",
+    "route": "/api/apply",
+    "status": 500,
+    "ip": "::ffff:127.0.0.1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0",
+    "duration": "44ms"
+  },
+  {
+    "timestamp": "2026-04-08T12:20:58.404Z",
+    "event": "APPLICATION_FAILED",
+    "error": "insert or update on table \"users\" violates foreign key constraint \"users_role_id_fkey\"",
+    "ip": "::ffff:127.0.0.1"
+  },
+  {
+    "timestamp": "2026-04-08T12:20:58.405Z",
+    "method": "POST",
+    "route": "/api/apply",
+    "status": 500,
+    "ip": "::ffff:127.0.0.1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0",
+    "duration": "41ms"
+  },
+  {
+    "timestamp": "2026-04-08T12:20:59.463Z",
+    "event": "APPLICATION_FAILED",
+    "error": "insert or update on table \"users\" violates foreign key constraint \"users_role_id_fkey\"",
+    "ip": "::ffff:127.0.0.1"
+  },
+  {
+    "timestamp": "2026-04-08T12:20:59.464Z",
+    "method": "POST",
+    "route": "/api/apply",
+    "status": 500,
+    "ip": "::ffff:127.0.0.1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0",
+    "duration": "38ms"
+  },
+  {
+    "timestamp": "2026-04-08T12:21:01.261Z",
+    "event": "APPLICATION_FAILED",
+    "error": "insert or update on table \"users\" violates foreign key constraint \"users_role_id_fkey\"",
+    "ip": "::ffff:127.0.0.1"
+  },
+  {
+    "timestamp": "2026-04-08T12:21:01.262Z",
+    "method": "POST",
+    "route": "/api/apply",
+    "status": 500,
+    "ip": "::ffff:127.0.0.1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0",
+    "duration": "148ms"
+  },
+  {
+    "timestamp": "2026-04-08T12:21:01.669Z",
+    "event": "APPLICATION_FAILED",
+    "error": "insert or update on table \"users\" violates foreign key constraint \"users_role_id_fkey\"",
+    "ip": "::ffff:127.0.0.1"
+  },
+  {
+    "timestamp": "2026-04-08T12:21:01.669Z",
+    "method": "POST",
+    "route": "/api/apply",
+    "status": 500,
+    "ip": "::ffff:127.0.0.1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0",
+    "duration": "38ms"
+  },
+  {
+    "timestamp": "2026-04-08T12:23:28.573Z",
+    "event": "APPLICATION_SUBMITTED",
+    "email": "jordanh6489@hotmail.com",
+    "user_id": "6b786e19-5ea7-4c04-8814-d597102e9519",
+    "ip": "::ffff:127.0.0.1"
+  },
+  {
+    "timestamp": "2026-04-08T12:23:28.574Z",
+    "method": "POST",
+    "route": "/api/apply",
+    "status": 200,
+    "ip": "::ffff:127.0.0.1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0",
+    "duration": "46ms"
+  },
+  {
+    "timestamp": "2026-04-08T12:24:35.370Z",
+    "method": "POST",
+    "route": "/api/login",
+    "status": 400,
+    "ip": "::ffff:127.0.0.1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0",
+    "duration": "0ms"
+  },
+  {
+    "timestamp": "2026-04-08T12:34:19.936Z",
+    "event": "LOGIN_FAILED",
+    "email": "jordanh6489@hotmail.com",
+    "reason": "Wrong password",
+    "ip": "::ffff:127.0.0.1"
+  },
+  {
+    "timestamp": "2026-04-08T12:34:19.938Z",
+    "method": "POST",
+    "route": "/api/login",
+    "status": 401,
+    "ip": "::ffff:127.0.0.1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0",
+    "duration": "133ms"
+  },
+  {
+    "timestamp": "2026-04-08T12:34:21.558Z",
+    "event": "LOGIN_FAILED",
+    "email": "jordanh6489@hotmail.com",
+    "reason": "Wrong password",
+    "ip": "::ffff:127.0.0.1"
+  },
+  {
+    "timestamp": "2026-04-08T12:34:21.559Z",
+    "method": "POST",
+    "route": "/api/login",
+    "status": 401,
+    "ip": "::ffff:127.0.0.1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0",
+    "duration": "85ms"
+  },
+  {
+    "timestamp": "2026-04-08T12:34:22.298Z",
+    "event": "LOGIN_FAILED",
+    "email": "jordanh6489@hotmail.com",
+    "reason": "Wrong password",
+    "ip": "::ffff:127.0.0.1"
+  },
+  {
+    "timestamp": "2026-04-08T12:34:22.299Z",
+    "method": "POST",
+    "route": "/api/login",
+    "status": 401,
+    "ip": "::ffff:127.0.0.1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0",
+    "duration": "84ms"
+  },
+  {
+    "timestamp": "2026-04-08T12:34:22.959Z",
+    "event": "LOGIN_FAILED",
+    "email": "jordanh6489@hotmail.com",
+    "reason": "Wrong password",
+    "ip": "::ffff:127.0.0.1"
+  },
+  {
+    "timestamp": "2026-04-08T12:34:22.960Z",
+    "method": "POST",
+    "route": "/api/login",
+    "status": 401,
+    "ip": "::ffff:127.0.0.1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0",
+    "duration": "81ms"
+  },
+  {
+    "timestamp": "2026-04-08T12:34:23.133Z",
+    "event": "LOGIN_FAILED",
+    "email": "jordanh6489@hotmail.com",
+    "reason": "Wrong password",
+    "ip": "::ffff:127.0.0.1"
+  },
+  {
+    "timestamp": "2026-04-08T12:34:23.135Z",
+    "method": "POST",
+    "route": "/api/login",
+    "status": 401,
+    "ip": "::ffff:127.0.0.1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0",
+    "duration": "87ms"
+  },
+  {
+    "timestamp": "2026-04-08T12:34:23.283Z",
+    "event": "LOGIN_FAILED",
+    "email": "jordanh6489@hotmail.com",
+    "reason": "Wrong password",
+    "ip": "::ffff:127.0.0.1"
+  },
+  {
+    "timestamp": "2026-04-08T12:34:23.284Z",
+    "method": "POST",
+    "route": "/api/login",
+    "status": 401,
+    "ip": "::ffff:127.0.0.1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0",
+    "duration": "84ms"
   }
 ]
