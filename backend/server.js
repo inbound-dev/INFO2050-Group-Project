@@ -7,6 +7,7 @@ const jwt = require('jsonwebtoken');
 const { authenticateToken, requireAdmin } = require('./middleware/auth');
 const { validateApply, validateLogin, validateContact } = require('./middleware/validation');
 const { logger, logEvent } = require('./middleware/logger');
+const multer = require('multer');
 require('dotenv').config();
 
 const pool = require('./db');
@@ -26,6 +27,30 @@ app.use(limiter);
 
 app.get('/', (req, res) => {
   res.send('Backend running');
+});
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => cb(null, 'uploads/'),
+  filename: (req, file, cb) => cb(null, Date.now() + '-' + file.originalname),
+});
+
+const allowedTypes = [
+  'application/pdf',
+  'application/msword',
+  'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+  'text/plain'
+];
+
+const upload = multer({
+  storage,
+  limits: { fileSize: 5 * 1024 * 1024 },
+  fileFilter: (req, file, cb) => {
+    if (allowedTypes.includes(file.mimetype)) {
+      cb(null, true);
+    } else {
+      cb(new Error('Invalid file type'));
+    }
+  },
 });
 
 app.get('/test-db', async (req, res) => {
@@ -50,9 +75,19 @@ app.get('/test-db', async (req, res) => {
   }
 });
 
-app.post('/api/apply', validateApply, async (req, res) => {
+app.post('/api/apply', (req, res, next) => {
+  
+  upload.single('resume')(req, res, (err) => {
+    if (err) {
+      return res.status(400).json({ success: false, message: err.message });
+    }
+    next();
+  });
+}, validateApply, async (req, res) => {
   try {
     const { full_name, email, phone, message } = req.body;
+    const file = req.file;
+    console.log("Uploaded file:", file);
 
     const defaultPasswordHash =
       '$2b$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy';
@@ -267,6 +302,41 @@ app.get('/test-token', (req, res) => {
   );
 
   res.json({ token });
+});
+
+app.get('/api/search', async (req, res) => {
+  try {
+    const { full_name, email } = req.query;
+
+    let query = `
+      SELECT a.application_id, a.user_id, u.full_name, u.email, u.phone, a.bio, a.created_at
+      FROM applications a
+      JOIN users u ON a.user_id = u.user_id
+      WHERE 1=1
+    `;
+
+    const params = [];
+    let paramIndex = 1;
+
+    if (full_name) {
+      query += ` AND u.full_name ILIKE $${paramIndex++}`;
+      params.push(`%${full_name}%`);
+    }
+
+    if (email) {
+      query += ` AND u.email ILIKE $${paramIndex++}`;
+      params.push(`%${email}%`);
+    }
+
+    query += ` ORDER BY a.created_at DESC LIMIT 50`;
+
+    const result = await pool.query(query, params);
+
+    res.json({ success: true, results: result.rows });
+  } catch (error) {
+    console.error('Search error:', error);
+    res.status(500).json({ success: false, message: 'Failed to perform search.' });
+  }
 });
 
 const PORT = 5000;

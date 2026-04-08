@@ -31,7 +31,12 @@ export default function Navigation() {
           </li>
           <li className="nav-item">
             <Link to="/login" className="nav-link">
-              login
+              Login
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link to="/search" className="nav-link">
+              Search
             </Link>
           </li>
         </ul>

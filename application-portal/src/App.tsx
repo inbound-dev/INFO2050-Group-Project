@@ -4,9 +4,10 @@ import Home from './pages/Home'
 import About from './pages/About'
 import Contact from './pages/Contact'
 import Apply from './pages/Apply'
-import LoginPage from './pages/Login'
+import LoginPage from './pages/login'
 import AdminPage from './pages/Admin'
 import Complete from './pages/Complete'
+import SearchForm from './pages/Search';
 import './App.css'
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/admin" element={<AdminPage />} />
           <Route path="/complete" element={<Complete />} />
+          <Route path="/search" element={<SearchForm />} />
         </Routes>
       </main>
     </Router>
