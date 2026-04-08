@@ -79,7 +79,10 @@ const LoginPage: React.FC = () => {
         <button type="submit">Sign In</button>
 
         <p>
-          Don't have an account? <a href="/apply">Sign up</a>
+          Don't have an account? <a href="/apply">Apply Now!</a>
+        </p>
+        <p>
+          forgot your <a href="/reset-password">password?</a>
         </p>
       </form>
     </div>
