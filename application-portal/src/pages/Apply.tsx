@@ -38,7 +38,42 @@ export default function Apply() {
       console.error("Apply error:", error);
       setError("Backend not running or request failed.");
     }
-  };
+    //screwing around
+    // const fileInput = document.querySelector('resume');
+    //  const file = fileInput?.getAttribute('value');
+
+
+    // const formData = new FormData();
+    // formData.append('resume', file); // 'image' is the key your server expects
+
+    // fetch('https://your-api.com', {
+    //   method: 'POST',
+    //   body: formData,
+    // })
+    // .then(response => response.json())
+    // .then(data => console.log('Success:', data))
+    // .catch(error => console.error('Error:', error));
+   };
+
+   //conventional way
+  // const multer = require('multer');
+  // const express = require('express');
+  // const app = express();
+
+  // const fileStorage = multer.diskStorage({
+  //   destination: (req: any, file: any, cb: (arg0: null, arg1: string) => void) => {
+  //     cb(null, '.../backend/uploads/');
+  //   },
+  //   filename: (req: any, file: { originalname: any; }, cb: (arg0: null, arg1: any) => void) => {
+  //     cb(null, file.originalname);
+  //   },
+  // });
+
+  // const upload = multer({ storage: fileStorage });
+
+  // app.post('/upload', upload.single('resume'), (req: any, res: { json: (arg0: { success: boolean; message: string; }) => void; }) => {
+  //   res.json({ success: true, message: 'File uploaded successfully' });
+  // });
 
   return (
     <div className="page">
@@ -47,7 +82,7 @@ export default function Apply() {
 
       {error && <p className="error">{error}</p>}
 
-      <form onSubmit={handleSubmit} noValidate>
+      <form action="/upload" onSubmit={handleSubmit} noValidate method="POST" encType="multipart/form-data">
         <div>
           <label htmlFor="fullName">Full Name</label>
           <input
@@ -93,6 +128,10 @@ export default function Apply() {
             onChange={(e) => setBio(e.target.value)}
           ></textarea>
         </div>
+
+        <p>Want to upload a resume?</p>
+        <input type="file" name="resume" />
+        
 
         <button type="submit">Submit Application</button>
       </form>

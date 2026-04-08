@@ -284,5 +284,82 @@
     "ip": "::ffff:127.0.0.1",
     "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0",
     "duration": "84ms"
+  },
+  {
+    "timestamp": "2026-04-08T13:37:24.689Z",
+    "event": "APPLICATION_FAILED",
+    "error": "password authentication failed for user \"postgres\"",
+    "ip": "::ffff:127.0.0.1"
+  },
+  {
+    "timestamp": "2026-04-08T13:37:24.692Z",
+    "method": "POST",
+    "route": "/api/apply",
+    "status": 500,
+    "ip": "::ffff:127.0.0.1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0",
+    "duration": "52ms"
+  },
+  {
+    "timestamp": "2026-04-08T13:37:32.714Z",
+    "event": "APPLICATION_FAILED",
+    "error": "password authentication failed for user \"postgres\"",
+    "ip": "::ffff:127.0.0.1"
+  },
+  {
+    "timestamp": "2026-04-08T13:37:32.716Z",
+    "method": "POST",
+    "route": "/api/apply",
+    "status": 500,
+    "ip": "::ffff:127.0.0.1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0",
+    "duration": "36ms"
+  },
+  {
+    "timestamp": "2026-04-08T13:37:37.257Z",
+    "event": "APPLICATION_FAILED",
+    "error": "password authentication failed for user \"postgres\"",
+    "ip": "::ffff:127.0.0.1"
+  },
+  {
+    "timestamp": "2026-04-08T13:37:37.258Z",
+    "method": "POST",
+    "route": "/api/apply",
+    "status": 500,
+    "ip": "::ffff:127.0.0.1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0",
+    "duration": "33ms"
+  },
+  {
+    "timestamp": "2026-04-08T13:38:32.668Z",
+    "event": "APPLICATION_SUBMITTED",
+    "email": "jordanh6489@hotmail.ca",
+    "user_id": "857a6cad-9b79-4c46-9ad9-8c332bad41d3",
+    "ip": "::ffff:127.0.0.1"
+  },
+  {
+    "timestamp": "2026-04-08T13:38:32.671Z",
+    "method": "POST",
+    "route": "/api/apply",
+    "status": 200,
+    "ip": "::ffff:127.0.0.1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0",
+    "duration": "64ms"
+  },
+  {
+    "timestamp": "2026-04-08T13:42:09.913Z",
+    "event": "APPLICATION_SUBMITTED",
+    "email": "nick123456@gmail.com",
+    "user_id": "ef160b05-3e10-459f-8c95-855f8f9dde28",
+    "ip": "::ffff:127.0.0.1"
+  },
+  {
+    "timestamp": "2026-04-08T13:42:09.914Z",
+    "method": "POST",
+    "route": "/api/apply",
+    "status": 200,
+    "ip": "::ffff:127.0.0.1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0",
+    "duration": "43ms"
   }
 ]
