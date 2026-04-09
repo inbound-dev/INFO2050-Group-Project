@@ -16,5 +16,14 @@
     "ip": "::ffff:127.0.0.1",
     "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0",
     "duration": "1ms"
+  },
+  {
+    "timestamp": "2026-04-08T19:56:21.440Z",
+    "method": "GET",
+    "route": "/api/search",
+    "status": 200,
+    "ip": "::ffff:127.0.0.1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0",
+    "duration": "68ms"
   }
 ]
